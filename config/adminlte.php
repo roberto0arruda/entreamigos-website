@@ -15,7 +15,7 @@ return [
 
     'title' => ':: Entre Amigos Manaus ::',
 
-    'title_prefix' => '',
+    'title_prefix' => 'EA - ',
 
     'title_postfix' => '',
 
@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'layout' => null,
+    'layout' => 'fixed',
 
     /*
     |--------------------------------------------------------------------------
@@ -110,27 +110,50 @@ return [
     'menu' => [
         'MAIN NAVIGATION',
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text'        => 'Dashboard',
             'url'         => 'admin',
             'icon'        => 'dashboard',
             'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text' => 'Blog',
+            'url'  => 'admin/blog',
+            'can'  => 'manage-blog',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/settings/profile',
             'icon' => 'user',
         ],
         [
             'text' => 'Change Password',
             'url'  => 'admin/settings',
             'icon' => 'lock',
+        ],
+        'SETTINGS',
+        [
+            'can' => 'root',
+            'text' => 'ACL',
+            'icon' => 'gear',
+            'submenu' => [
+                [
+                    'text' => 'Profiles',
+                    'url'  => 'admin/settings/profiles',
+                    'icon' => 'user',
+                ],
+                [
+                    'text' => 'Permissions',
+                    'url'  => 'admin/settings',
+                    'icon' => 'lock',
+                ],
+                [
+                    'text' => 'Roles',
+                    'url'  => 'admin/settings',
+                    'icon' => 'building',
+                ],
+            ],
         ],
         [
             'text'    => 'Multilevel',
@@ -156,10 +179,6 @@ return [
                                     'text' => 'Level Three',
                                     'url'  => '#',
                                 ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
                             ],
                         ],
                     ],
@@ -170,18 +189,9 @@ return [
                 ],
             ],
         ],
-        'LABELS',
-        [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ],
         [
             'text'       => 'Warning',
             'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
         ],
     ],
 

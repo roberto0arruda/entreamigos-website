@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Configuration\Permission;
 
 class User extends Authenticatable
 {
@@ -27,4 +28,23 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(\App\Models\Configuration\Role::class);
+    }
+
+    public function hasPermission(Permission $permission)
+    {
+        return $this->hasAnyRoles($permission->roles);
+    }
+
+    public function hasAnyRoles($roles)
+    {
+        if( is_array($roles) || is_object($roles) ) {
+            return !! $roles->intersect($this->roles)->count();
+        }
+
+        return $this->roles->contains('name', $roles);
+    }
 }

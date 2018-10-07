@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\Admin\Setting\Permission;
+use App\Models\Admin\Setting\Role;
+use App\User;
+
 use App\Models\Post;
+use Gate;
 
 class HomeController extends Controller
 {
@@ -27,7 +32,12 @@ class HomeController extends Controller
     public function index(Post $post)
     {
         $posts = $post->all();
+        $totalPosts = Post::count();
+        $totalUsers = User::count();
+        $totalPermissions = Permission::count();
+        $totalRoles = Role::count();
+        // $posts = $post->where('user_id', auth()->user()->id)->get();
 
-        return view('admin.home.index', compact('posts') );
+        return view('admin.home.index', compact('posts','totalUsers', 'totalPermissions', 'totalRoles', 'totalPosts') );
     }
 }
