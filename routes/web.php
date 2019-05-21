@@ -8,8 +8,8 @@ $this->group(['middleware' => ['auth'], 'namespace' => 'Admin' ], function() {
 });
 
 Route::redirect('/', '/site');
-$this->group(['namespace' => 'Site'], function() {
-    $this->get('/site', 'SiteController@index');
+Route::group(['namespace' => 'Site'], function() {
+    Route::get('/site', 'SiteController@index');
     $this->get('/about', 'SiteController@about');
     $this->get('/contact', 'SiteController@contact');
     $this->get('/projects', 'SiteController@projects');
