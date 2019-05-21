@@ -2,6 +2,9 @@
 
 return [
 
+    'dev_name' => env('APP_DEV_NAME', 'Roberto Arruda'),
+    'dev_email' => env('APP_DEV_EMAIL', 'roberto0arruda@hotmail.com'),
+    
     /*
     |--------------------------------------------------------------------------
     | Application Name

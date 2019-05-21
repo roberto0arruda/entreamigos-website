@@ -15,7 +15,7 @@
     <!-- small box -->
     <div class="small-box bg-aqua">
       <div class="inner">
-        <h3> {{$totalPosts}} </h3>
+        <h3> 4 </h3>
         <p>Posts</p>
       </div>     
       <div class="icon">
@@ -71,16 +71,4 @@
   </div>  
   <!-- ./col -->
 </div>
-
-    @forelse ($posts as $post)
-        <h1> {{ $post->title }} </h1>
-        <p> {{ $post->description }} </p> <br>
-        <b>Autor: {{ $post->user->name }} </b>
-        @can('update-post', $post)
-            <a href=" {{ url("admin/post/$post->id/update") }} ">Editar</a>
-        @endcan
-        <hr>
-    @empty
-        <p>Nenhum Post Cadastrado!!!</p>
-    @endforelse
 @stop

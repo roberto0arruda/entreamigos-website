@@ -13,11 +13,11 @@ return [
     |
     */
 
-    'title' => ':: Entre Amigos Manaus ::',
+    'title' => 'Entre Amigos',
 
     'title_prefix' => 'EA - ',
 
-    'title_postfix' => '',
+    'title_postfix' => ' - Manaus',
 
     /*
     |--------------------------------------------------------------------------
@@ -117,32 +117,18 @@ return [
             'label_color' => 'success',
         ],
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url'  => 'admin/settings/profile',
-            'icon' => 'user',
+            'text' => 'Website',
+            'url'  => 'site',
+            'icon' => 'sitemap'
         ],
         [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
+            'header' => 'SETTINGS',
         ],
-        'SETTINGS',
         [
             'can' => 'root',
             'text' => 'ACL',
             'icon' => 'gear',
             'submenu' => [
-                [
-                    'text' => 'Profiles',
-                    'url'  => 'admin/settings/profiles',
-                    'icon' => 'user',
-                ],
                 [
                     'text' => 'Permissions',
                     'url'  => 'admin/settings',
@@ -156,8 +142,8 @@ return [
             ],
         ],
         [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
+            'text'    => 'submenus',
+            'icon'    => 'users',
             'submenu' => [
                 [
                     'text' => 'Level One',
@@ -190,8 +176,22 @@ return [
             ],
         ],
         [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
+            'header' => 'COMPANY',
+        ],
+        [
+            'text'    => 'Business',
+            'icon'    => 'building',
+            'url'     => 'admin/company'
+        ],
+        [
+            'text'    => 'Products',
+            'icon'    => 'shopping-basket',
+            'url'     => 'admin/products'
+        ],
+        [
+            'text' => 'Voluntaries',
+            'url'  => 'admin/profiles',
+            'icon' => 'users',
         ],
     ],
 

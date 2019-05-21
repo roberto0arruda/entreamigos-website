@@ -3,9 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
-@yield('title', config('adminlte.title', 'AdminLTE 2'))
-@yield('title_postfix', config('adminlte.title_postfix', ''))</title>
+    <title>
+        @yield('title_prefix', config('adminlte.title_prefix', ''))
+        @yield('title', config('adminlte.title', 'AdminLTE 2'))
+        @yield('title_postfix', config('adminlte.title_postfix', ''))
+    </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -38,30 +40,31 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
 <body class="hold-transition @yield('body_class')">
 
-@yield('body')
+    @yield('body')
 
-<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
-<script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-@if(config('adminlte.plugins.select2'))
-    <!-- Select2 -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-@endif
+    @if(config('adminlte.plugins.select2'))
+        <!-- Select2 -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    @endif
 
-@if(config('adminlte.plugins.datatables'))
-    <!-- DataTables with bootstrap 3 renderer -->
-    <script src="//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
-@endif
+    @if(config('adminlte.plugins.datatables'))
+        <!-- DataTables with bootstrap 3 renderer -->
+        <script src="//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
+    @endif
 
-@if(config('adminlte.plugins.chartjs'))
-    <!-- ChartJS -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
-@endif
+    @if(config('adminlte.plugins.chartjs'))
+        <!-- ChartJS -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+    @endif
 
-@yield('adminlte_js')
+    @yield('adminlte_js')
 
 </body>
 </html>
