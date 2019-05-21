@@ -9,7 +9,7 @@ use App\Models\Admin\Setting\Permission;
 use App\Models\Admin\Setting\Role;
 use App\User;
 
-use App\Models\Post;
+use App\Models\Admin\Post;
 use Gate;
 
 class HomeController extends Controller
@@ -31,13 +31,12 @@ class HomeController extends Controller
      */
     public function index(Post $post)
     {
-        $posts = $post->all();
-        $totalPosts = Post::count();
+        // $totalPosts = Post::count();
         $totalUsers = User::count();
         $totalPermissions = Permission::count();
         $totalRoles = Role::count();
         // $posts = $post->where('user_id', auth()->user()->id)->get();
 
-        return view('admin.home.index', compact('posts','totalUsers', 'totalPermissions', 'totalRoles', 'totalPosts') );
+        return view('admin.home.index', compact('totalUsers', 'totalPermissions', 'totalRoles') );
     }
 }
