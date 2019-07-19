@@ -1,7 +1,7 @@
 <?php
 
 $this->group(['middleware' => ['auth'], 'namespace' => 'Admin' ], function() {
-    $this->get('admin', 'HomeController@index')->name('admin.home');   
+    $this->get('admin', 'HomeController@index')->name('admin.home');
     $this->resource('admin/company', 'CompanyController');
     $this->resource('admin/profiles', 'UserController');
     $this->resource('admin/products', 'ProductController');
@@ -13,7 +13,7 @@ Route::group(['namespace' => 'Site'], function() {
     $this->get('/about', 'SiteController@about');
     $this->get('/contact', 'SiteController@contact');
     $this->get('/projects', 'SiteController@projects');
-    $this->get('/form', 'SiteController@form');
+    $this->any('/subscribe', 'SiteController@subscribe');
 });
 
 Auth::routes();
