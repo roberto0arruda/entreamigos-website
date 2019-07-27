@@ -108,7 +108,7 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        ['header' => 'main_navigation'],
         [
             'text'        => 'Dashboard',
             'url'         => 'admin',
@@ -117,15 +117,20 @@ return [
             'label_color' => 'success',
         ],
         [
-            'text' => 'Website',
+            'text' => 'Site',
             'url'  => 'site',
             'icon' => 'sitemap'
         ],
+        ['header' => 'projects', 'can' => 'develop',],
         [
-            'header' => 'SETTINGS',
+            'text'  => 'projects',
+            'can'   => 'develop',
+            'icon'  => 'paperclip'
+        ],
+        ['header' => 'SETTINGS', 'can'   => 'develop',
         ],
         [
-            'can' => 'root',
+            'can' => 'develop',
             'text' => 'ACL',
             'icon' => 'gear',
             'submenu' => [
@@ -136,7 +141,7 @@ return [
                 ],
                 [
                     'text' => 'Roles',
-                    'url'  => 'admin/settings',
+                    'url'  => 'admin/settings/roles',
                     'icon' => 'building',
                 ],
             ],
@@ -144,6 +149,7 @@ return [
         [
             'text'    => 'submenus',
             'icon'    => 'users',
+            'can'   => 'develop',
             'submenu' => [
                 [
                     'text' => 'Level One',
@@ -175,23 +181,36 @@ return [
                 ],
             ],
         ],
+        ['header' => 'COMPANY', 'can' => 'develop',],
         [
-            'header' => 'COMPANY',
+            'text'  => 'Business',
+            'can'   => 'develop',
+            'icon'  => 'building',
+            'url'   => 'admin/companies'
         ],
         [
-            'text'    => 'Business',
-            'icon'    => 'building',
-            'url'     => 'admin/company'
+            'text'  => 'Products',
+            'can'   => 'develop',
+            'icon'  => 'shopping-basket',
+            'url'   => 'admin/products'
         ],
         [
-            'text'    => 'Products',
-            'icon'    => 'shopping-basket',
-            'url'     => 'admin/products'
-        ],
-        [
-            'text' => 'Voluntaries',
-            'url'  => 'admin/profiles',
-            'icon' => 'users',
+            'text'  => 'Voluntaries',
+            'can'   => 'develop',
+            'icon'  => 'users',
+            'submenu' => [
+                [
+                    'text' => 'Ativos',
+                    'url'  => 'admin/profiles',
+                    'icon' => 'check',
+                ],
+                [
+                    'text' => 'Reservas',
+                    'url'  => 'admin/subscribes',
+                    'icon' => 'list',
+                ],
+
+            ],
         ],
     ],
 

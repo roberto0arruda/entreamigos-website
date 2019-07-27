@@ -15,9 +15,9 @@
     <!-- small box -->
     <div class="small-box bg-aqua">
       <div class="inner">
-        <h3> 4 </h3>
-        <p>Posts</p>
-      </div>     
+        <h3> 3 </h3>
+        <p>Projetos</p>
+      </div>
       <div class="icon">
         <i class="ion ion-bag"></i>
       </div>
@@ -45,8 +45,8 @@
     <!-- small box -->
     <div class="small-box bg-yellow">
       <div class="inner">
-        <h3> {{$totalRoles}} <sup style="font-size: 20px">-</sup></h3>
-        <p>Roles</p>
+        <h3> {{$totalRoles}} <sup style="font-size: 20px"><i class="fa fa-users" aria-hidden="true"></i></sup></h3>
+        <p>Reservas</p>
       </div>
       <div class="icon">
         <i class="ion ion-stats-bars"></i>
@@ -55,7 +55,7 @@
     </div>
   </div>
   <!-- ./col -->
-  
+
   <div class="col-lg-3 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-red">
@@ -68,7 +68,7 @@
       </div>
       <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
     </div>
-  </div>  
+  </div>
   <!-- ./col -->
 </div>
 @stop

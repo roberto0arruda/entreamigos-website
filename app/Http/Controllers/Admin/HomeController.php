@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Admin\Setting\Permission;
-use App\Models\Admin\Setting\Role;
+use App\Models\Admin\Permission;
+use App\Models\Admin\Role;
 use App\User;
 
 use App\Models\Admin\Post;
@@ -34,7 +34,7 @@ class HomeController extends Controller
         // $totalPosts = Post::count();
         $totalUsers = User::count();
         $totalPermissions = Permission::count();
-        $totalRoles = Role::count();
+        $totalRoles = \App\Models\Site\Subscribe::count();
         // $posts = $post->where('user_id', auth()->user()->id)->get();
 
         return view('admin.home.index', compact('totalUsers', 'totalPermissions', 'totalRoles') );
