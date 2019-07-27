@@ -1,9 +1,9 @@
 @extends('layouts.site')
 
-@section('title', 'increva-se')
+@section('title', 'Pré-Inscrição')
 
 @section('content')
-<h1 class="mt-4 mb-3">Cadastro Reserva <small>2019.1</small></h1>
+<h1 class="mt-4 mb-3">Cadastro Reserva <small>{{date('Y')}}.{{date('m') <= '06' ? '1' : '2' }}</small></h1>
 <p>Para o processo seletivo de novos voluntários</p>
 
 <ol class="breadcrumb">
@@ -175,7 +175,7 @@
             <div class="form-group col-md-3">
                 <label for="civil">Estado Civil</label>
                 <small class="form-text text-muted">&nbsp;</small>
-                <select name="est_civil" id="civil" class="form-control">
+                <select name="est_civil" id="civil" class="form-control" required>
                     <option value=""></option>
                     <option value="solteiro">Solteiro (a)</option>
                     <option value="casado">Casado (a)</option>
@@ -282,7 +282,6 @@
             $('#vOP').attr('disabled', true);
             $('#vOP').removeAttr('placeholder');
             document.getElementById("vOPNS").textContent = "   NÃO    SIM";
-
         })
     })
 </script>

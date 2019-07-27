@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\Models\Admin\Setting\Permission;
+use App\Models\Admin\Permission;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -41,9 +41,8 @@ class AuthServiceProvider extends ServiceProvider
         }
         Gate::before(function($user, $ability) {
 
-            if( $user->name == 'root' )
+            if( $user->name === 'Roberto Arruda' )
                 return true;
-            
             // if( $user->hasAnyRoles('root') )
             //     return true;
         });
