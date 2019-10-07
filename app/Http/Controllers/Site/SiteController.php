@@ -31,14 +31,8 @@ class SiteController extends Controller
         return view('site.projects.index');
     }
 
-    public function subscribe(Request $request)
+    public function subscribe()
     {
-        if ($request->input()) {
-            $sub = Subscribe::create($request->except('_token'));
-
-            return view('site.subscribe.index');
-        } else {
-            return view('site.subscribe.index', ['success' => 'obrigado por cadastrar']);
-        }
+        return view('site.subscribe.index');
     }
 }

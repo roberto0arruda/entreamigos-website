@@ -13,7 +13,7 @@
     <li class="breadcrumb-item active">Cadastro</li>
 </ol>
 
-<form action="" method="post">
+<form action="" id="form-submit" method="post">
     {!! csrf_field() !!}
     <fieldset id="voluntario">
         <legend>Identificação</legend>
@@ -28,19 +28,19 @@
                 <div class="col-xs-12 col-sm-4">
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <label for="nasc"> Data Nascimento</label>
-                    <input type="date" name="data_nascimento" id="nasc" class="form-control" aria-describedby="nascHelpId" required>
+                    <input type="date" name="data_nascimento" id="nasc" class="form-control" onblur="validadata();" aria-describedby="nascHelpId" required>
                     <small id="nascHelpId" class="form-text text-muted">Ter 18 anos ou mais</small>
                 </div>
                 <div class="col-xs-12 col-sm-4">
                     <i class="fa fa-phone" aria-hidden="true"></i>
                     <label for="celular">contato</label>
-                    <input type="text" class="form-control" name="celular" id="celular" aria-describedby="cellHelpId" placeholder="(99) 9 9999-9999">
+                    <input type="text" class="form-control" name="celular" id="celular" aria-describedby="cellHelpId" placeholder="(99) 9 9999-9999" required>
                     <small id="cellHelpId" class="form-text text-muted">de preferência com <i class="fa fa-whatsapp" aria-hidden="true"></i></small>
                 </div>
                 <div class="col-xs-12 col-sm-4">
                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                     <label for="email">E-mail</label>
-                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelpId" placeholder="email@example.com">
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelpId" placeholder="email@example.com" required>
                     <small id="emailHelpId" class="form-text text-muted">Peencha com seu melhor Email</small>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                             <input type="radio" name="doador" id="dN" value="N">
                         </div>
                         <div class="input-group-text" id="dT" style="display:none">
-                            <input type="radio" name="doador" id="dT" value="T">
+                            <input type="radio" name="doador" id="dG" value="G">
                         </div>
                     </div>
                     <input type="text" class="form-control" name="tp_sang" id="tp_sang" minlength="2" placeholder="Tipo sanguíneo"
@@ -154,7 +154,7 @@
                 <label for="escolaridade">Escolaridade</label>
                 <small class="form-text text-muted text-right">Curs. | Comp.</small>
                 <div class="input-group">
-                    <select name="escolaridade" class="form-control">
+                    <select name="escolaridade" id="escolaridade" class="form-control" required>
                         <option value=""></option>
                         <option value="MEDIO">Ens. Médio</option>
                         <option value="SUPERIOR">Ens. Superior</option>
@@ -171,6 +171,7 @@
                 </div>
             </div>
         </div>
+        <div class="form-group" id="curso"></div>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="civil">Estado Civil</label>
@@ -185,8 +186,8 @@
             <div class="form-group col-md-1">
                 <label for="blusa">Tam. Blusa</label>
                 <small class="form-text text-muted">&nbsp;</small>
-                <select name="blusa" id="" class="form-control">
-                    <option value=""></option>
+                <select name="blusa" id="" class="form-control" required>
+                    <option></option>
                     <option value="PP">PP</option>
                     <option value="P">P</option>
                     <option value="M">M</option>
@@ -236,18 +237,19 @@
     $('#celular').mask('(00) 0 0000-0000');
 </script>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    document.getElementById("dSNG").textContent = "   SIM    NÃO";
-    document.getElementById("fNSQ").textContent = "   NÃO    SIM";
-    document.getElementById("tNSO").textContent = "   NÃO    SIM";
-    document.getElementById("vOPNS").textContent = "   NÃO    SIM";
+    document.getElementById("dSNG").textContent = "   SIM    NÃO"; // doador SIM, NAO, GOSTARIA?
+    document.getElementById("fNSQ").textContent = "   NÃO    SIM"; // filhos NAO, SIM QUANTOS?
+    document.getElementById("tNSO").textContent = "   NÃO    SIM"; // trabalha, NAO, SIM ONDE? CARGO?
+    document.getElementById("vOPNS").textContent = "   NÃO    SIM"; // voluntario outro projeto? onde?
     $(document).ready(function() {
         $('#dN').click(function() {
-            $('#dT').show();
+            $('#dG').show();
             document.getElementById("dSNG").textContent = "   SIM    NÃO   GOStaria";
         })
         $('#dS').click(function() {
-            $('#dT').hide();
+            $('#dG').hide();
             document.getElementById("dSNG").textContent = "   SIM    NÃO";
         })
 
@@ -283,10 +285,103 @@
             $('#vOP').removeAttr('placeholder');
             document.getElementById("vOPNS").textContent = "   NÃO    SIM";
         })
+        $('#escolaridade').change(function() {
+            if ($('#escolaridade').val() == 'SUPERIOR' || $('#escolaridade').val() == 'POS' ) {
+                $('#curso').empty();
+                $('#curso').append(`<label for="curso">Seu curso</label>
+                                    <input type="text" name="curso" class="form-control" placeholder="" aria-describedby="helpCurso" required>
+                                    <small id="helpCurso" class="text-muted">Qual curso você estuda ou se formou?</small>`);
+            } else {
+                $('#curso').empty();
+            }
+        })
+    })
+
+    $('#form-submit').submit(function(e) {
+        e.preventDefault();
+
+        // validar form
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom',
+            showConfirmButton: false,
+            timer: 4000
+        });
+        var situaCurso = $("input[name='situa']:checked").val();
+        if (situaCurso) {
+            var escolaridade = $('#escolaridade').val() + situaCurso;
+            $('<input>').attr({
+                type: 'text',
+                name: 'escolaridade',
+                value: escolaridade
+            }).appendTo('#form-submit');
+        } else {
+            Toast.fire({
+                type: 'error',
+                title: 'Por favor! informe a situação do seu curso',
+            });
+            return false;
+        }
+        var form = $(this);
+        var data = form.serialize();
+
+        axios.post('/api/subscribe', data)
+        .then(function (response) {
+            console.log(response);
+            Swal.fire({
+                title: 'Obrigado',
+                text: 'Agradecemos sua inscrição.',
+                type: 'success',
+                confirmButtonColor: '#ff4500',
+                confirmButtonText: 'OK',
+                onAfterClose: () => window.location.href = "/"
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     })
 </script>
 
-<!-- Adicionando JQuery viacep-->
+<script>
+    // validar idade
+    function validadata() {
+        var data = document.getElementById("nasc").value; // pega o valor do input
+        data = data.replace(/\//g, "-"); // substitui eventuais barras (ex. IE) "/" por hífen "-"
+        var data_array = data.split("-"); // quebra a data em array
+        var dataPTBR = data_array[2]+"/"+data_array[1]+"/"+data_array[0];
+
+        // para o IE onde será inserido no formato dd/MM/yyyy
+        if(data_array[0].length != 4){
+            data = data_array[2]+"-"+data_array[1]+"-"+data_array[0]; // remonto a data no formato yyyy/MM/dd
+        }
+
+        // comparo as datas e calculo a idade
+        var hoje = new Date();
+        var nasc  = new Date(data);
+        var idade = hoje.getFullYear() - nasc.getFullYear();
+        var m = hoje.getMonth() - nasc.getMonth();
+        if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
+
+        if(idade < 18) {
+            Swal.fire({
+                title: 'Que pena! sua data de nascimento ' + dataPTBR,
+                text: 'Pessoas menores de 18 anos, não podem se inscrever.',
+                type: 'error',
+                confirmButtonColor: '#ff4500',
+                confirmButtonText: 'OK'
+            });
+            document.getElementById("nasc").value = '';
+            document.getElementById("nasc").focus();
+            return false;
+
+        }
+        // se for maior que 60 não vai acontecer nada!
+        return false;
+    }
+</script>
+
+<!-- Adicionando JQuery viacep -->
 <script type="text/javascript" >
     $(document).ready(function() {
         //adiciona mascara de cep

@@ -26,12 +26,13 @@ class CreateSubscribesTable extends Migration
             $table->string('celular');
             $table->string('email');
 
-            $table->string('doador');
+            $table->string('doador')->default('N');
             $table->string('tp_sang')->nullable();
             $table->string('trabalha')->nullable();
             $table->string('cargo')->nullable();
             $table->string('escolaridade');
-            $table->string('filhos')->nullable();
+            $table->string('curso')->nullable();
+            $table->string('filhos')->default('N');
             $table->string('est_civil');
             $table->string('blusa');
             $table->string('outro_projeto')->nullable();
